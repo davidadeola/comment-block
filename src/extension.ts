@@ -11,13 +11,17 @@ export function activate(context: vscode.ExtensionContext) {
         const cursorPosition = selection.active;
 
         let startLine = cursorPosition.line;
-        // let endLine = cursorPosition.line;
+        let endLine = cursorPosition.line;
 
         // Find the beginning of the block
         while (startLine > 0 && document.lineAt(startLine).isEmptyOrWhitespace) {
             startLine--;
         }
 
+        // Find the end of the block
+        while (endLine < document.lineCount - 1 && document.lineAt(endLine).isEmptyOrWhitespace) {
+            endLine++;
+        }
         vscode.window.showInformationMessage(
             'Hello World from Awesome VSCode Extension Boilerplate!',
         );
