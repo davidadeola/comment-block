@@ -1,31 +1,38 @@
 {
-    "name": "awesome-vscode-extension-boilerplate",
-    "displayName": "Awesome VSCode Extension Boilerplate",
-    "version": "0.0.29",
-    "description": "An awesome vscode extension boilerplate",
-    "publisher": "YuTengjing",
+    "name": "comment-block",
+    "displayName": "Uncomment block comment",
+    "version": "0.0.1",
+    "description": "VSCode extension that uncomments an entire block of code with a single command, from any position in the block of comment.",
+    "publisher": "davidadeola",
     "private": true,
-    "preview": true,
+    "preview": false,
     "author": {
-        "name": "YuTengjing",
-        "email": "ytj2713151713@gmail.com",
-        "url": "https://github.com/tjx666"
+        "name": "David Adeola",
+        "email": "adeoladavidoluwole@gmail.com",
+        "url": "https://github.com/davidadeola"
     },
     "license": "SEE LICENSE IN LICENSE",
-    "homepage": "https://github.com/tjx666/awesome-vscode-extension-boilerplate/blob/master/README.md",
+    "homepage": "https://github.com/davidadeola/comment-block/blob/main/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/tjx666/awesome-vscode-extension-boilerplate"
+        "url": "https://github.com/davidadeola/comment-block"
     },
     "bugs": {
-        "url": "https://github.com/tjx666/awesome-vscode-extension-boilerplate/issues",
-        "email": "ytj2713151713@gmail.com"
+        "url": "https://github.com/davidadeola/comment-block/issues",
+        "email": "adeoladavidoluwole@gmail.com"
     },
     "keywords": [
-        "boilerplate",
-        "template"
+        "comment",
+        "block",
+        "comment block",
+        "uncomment",
+        "uncomment comment",
+        "uncomment block comment",
+        "remove comment",
+        "remove block comment"
     ],
     "categories": [
+        "Formatters",
         "Other"
     ],
     "main": "./out/src/extension.js",
@@ -37,15 +44,15 @@
         {
             "url": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
             "description": "PRs Welcome",
-            "href": "https://github.com/tjx666/awesome-vscode-extension-boilerplate/fork"
+            "href": "https://github.com/davidadeola/comment-block/fork"
         }
     ],
     "activationEvents": [],
     "contributes": {
         "commands": [
             {
-                "command": "awesome-vscode-extension-boilerplate.helloWorld",
-                "title": "Hello World"
+                "command": "comment-block.uncomment",
+                "title": "Uncomment block comment"
             }
         ]
     },
