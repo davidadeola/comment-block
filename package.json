@@ -54,6 +54,20 @@
                 "command": "comment-block.uncomment",
                 "title": "Uncomment block comment"
             }
+        ],
+        "keybindings": [
+            {
+                "command": "comment-block.uncomment",
+                "key": "Cmd+Shift+/",
+                "mac": "Cmd+Shift+/",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "comment-block.uncomment",
+                "key": "Ctrl+Shift+/",
+                "mac": "Ctrl+Shift+/",
+                "when": "editorTextFocus"
+            }
         ]
     },
     "eslintConfig": {
