@@ -7,12 +7,15 @@
 
 {/* 
 This is a block comment in JSX.
-It is enclosed between {/* and * /.
+It is enclosed between
 */}
 
-console.log('test workspace!');
-function unBuild () {
-  let build = window.document.links;
-}
+
+// console.log('test workspace!');
+// function unBuild () {
+//   let build = window.document.links;
+// }
 console.log("not a comment")
 // This is another comment let's check it again
+
+{/* JSX elements here */}

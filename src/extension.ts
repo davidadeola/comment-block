@@ -31,15 +31,25 @@ export function activate(context: vscode.ExtensionContext) {
             for (let line = startLine; line <= endLine; line++) {
                 const text = document.lineAt(line).text.trim();
                 if (isCommentLine(text)) {
-                    const uncommentedText = text.replace(/^\s*\/\/\s?/, ''); // Remove '//' from the beginning of the line
+                    let uncommentedText = text;
+                    if (text.startsWith('//')) {
+                        uncommentedText = text.replace(/^\s*\/\/\s?/, ''); // Remove '//' from the beginning of the line
+                    } else if (text.startsWith('/*')) {
+                        uncommentedText = text.replace(/^\s*\/\*\*?\s?/, ''); // Remove '/*' or '/**' from the beginning of the line
+                        uncommentedText = uncommentedText.replace(/\*+\/\s*$/, ''); // Remove '*/' from the end of the line
+                    } else if (text.startsWith('*')) {
+                        uncommentedText = text.replace(/^\s*\*\s?/, ''); // Remove '*' from the beginning of the line
+                    } else if (text.startsWith('{/*')) {
+                        uncommentedText = text.replace(/^\s*\{\/\*\s?/, ''); // Remove '{/*' from the beginning
+                        uncommentedText = uncommentedText.replace(/\s*\*\/\}$/, ''); // Remove '*/}' from the end
+                        uncommentedText = uncommentedText.replace(/\s*\/\/\s?/, ''); // Remove trailing '//' if present
+                    }
+                    // Remove trailing slash '/' if present
+                    uncommentedText = uncommentedText.replace(/\s*\/\}?$/, '');
                     editBuilder.replace(document.lineAt(line).range, uncommentedText);
                 }
             }
         });
-
-        // vscode.window.showInformationMessage(
-        //     'Hello World from Awesome VSCode Extension Boilerplate!',
-        // );
     });
 
     context.subscriptions.push(disposable);
@@ -50,7 +60,8 @@ function isCommentLine(line: string): boolean {
         line.trim().startsWith('//') ||
         line.trim().startsWith('/*') ||
         line.trim().startsWith('*') ||
-        line.trim().startsWith("'")
+        line.trim().startsWith("'") ||
+        line.trim().startsWith('{/*') // Check for JSX block comments
     );
 }
 // This method is called when your extension is deactivated
