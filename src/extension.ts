@@ -14,25 +14,25 @@ export function activate(context: vscode.ExtensionContext) {
         let endLine = cursorPosition.line;
 
         // Find the beginning of the block
-        while (startLine > 0 && document.lineAt(startLine).isEmptyOrWhitespace) {
+        while (startLine > 0 && isCommentLine(document.lineAt(startLine).text)) {
             startLine--;
         }
 
         // Find the end of the block
-        while (endLine < document.lineCount - 1 && document.lineAt(endLine).isEmptyOrWhitespace) {
+        while (endLine < document.lineCount - 1 && isCommentLine(document.lineAt(endLine).text)) {
             endLine++;
         }
 
         // Comment style used in the code
-        const commentStyle = getCommentStyle(document.lineAt(startLine).text);
+        // const commentStyle = getCommentStyle(document.lineAt(startLine).text);
 
         // uncomment the entire block
         vscode.window.activeTextEditor?.edit((editBuilder) => {
-            for (let line = startLine; line < endLine; line++) {
-                let text = document.lineAt(line).text.trim();
-                if (text.startsWith(commentStyle)) {
-                    text = text.slice(commentStyle.length).trim();
-                    editBuilder.replace(document.lineAt(line).range, text);
+            for (let line = startLine; line <= endLine; line++) {
+                const text = document.lineAt(line).text.trim();
+                if (isCommentLine(text)) {
+                    const uncommentedText = text.replace(/^\s*\/\/\s?/, ''); // Remove '//' from the beginning of the line
+                    editBuilder.replace(document.lineAt(line).range, uncommentedText);
                 }
             }
         });
@@ -45,13 +45,13 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
 }
 
-function getCommentStyle(line: string): string {
-    if (line.trim().startsWith('//')) {
-        return '//';
-    } else if (line.trim().startsWith('/*')) {
-        return '/*';
-    }
-    return '';
+function isCommentLine(line: string): boolean {
+    return (
+        line.trim().startsWith('//') ||
+        line.trim().startsWith('/*') ||
+        line.trim().startsWith('*') ||
+        line.trim().startsWith("'")
+    );
 }
 // This method is called when your extension is deactivated
 export function deactivate() {}
