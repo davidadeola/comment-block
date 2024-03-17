@@ -43,8 +43,12 @@ export function activate(context: vscode.ExtensionContext) {
                         uncommentedText = text.replace(/^\s*\{\/\*\s?/, ''); // Remove '{/*' from the beginning
                         uncommentedText = uncommentedText.replace(/\s*\*\/\}$/, ''); // Remove '*/}' from the end
                         uncommentedText = uncommentedText.replace(/\s*\/\/\s?/, ''); // Remove trailing '//' if present
+                    } else if (text.startsWith('"""')) {
+                        // Handle Python multiline comments
+                        uncommentedText = text.replace(/^\s*"""/, ''); // Remove '"""' from the beginning of the line
+                        uncommentedText = uncommentedText.replace(/"""\s*$/, ''); // Remove '"""' from the end of the line
                     }
-                    // Remove trailing slash '/' if present
+                    // Remove trailing slash '/' if present and "}"
                     uncommentedText = uncommentedText.replace(/\s*\/\}?$/, '');
                     editBuilder.replace(document.lineAt(line).range, uncommentedText);
                 }
@@ -60,8 +64,8 @@ function isCommentLine(line: string): boolean {
         line.trim().startsWith('//') ||
         line.trim().startsWith('/*') ||
         line.trim().startsWith('*') ||
-        line.trim().startsWith("'") ||
-        line.trim().startsWith('{/*') // Check for JSX block comments
+        line.trim().startsWith('{/*') || // Check for JSX block comments
+        line.trim().startsWith('"""') // Python multiline comments
     );
 }
 // This method is called when your extension is deactivated

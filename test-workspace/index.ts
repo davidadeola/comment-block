@@ -10,6 +10,11 @@ This is a block comment in JSX.
 It is enclosed between
 */}
 
+{/*
+  <div>
+    <div>This is the inner Div</div>
+  </div>
+*/}
 
 // console.log('test workspace!');
 // function unBuild () {
