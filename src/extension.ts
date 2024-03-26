@@ -2,7 +2,7 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
-    const disposable = vscode.commands.registerCommand('comment-block.uncomment', () => {
+    const disposable = vscode.commands.registerCommand('comment-block.uncomment', async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) return;
 
@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
         const { startLine, endLine } = findCommentBlockBounds(document, cursorPosition);
 
         // Uncomment the entire block
-        vscode.window.activeTextEditor?.edit((editBuilder) => {
+        await editor.edit((editBuilder) => {
             for (let line = startLine; line <= endLine; line++) {
                 const text = document.lineAt(line).text.trim();
                 if (isCommentLine(text)) {
@@ -51,7 +51,7 @@ function isCommentLine(line: string): boolean {
     return (
         line.trim().startsWith('//') ||
         line.trim().startsWith('/*') ||
-        line.trim().startsWith('*') ||
+        line.trim().startsWith('*') || // Handles single line comments within a block comment (e.g., JSX)
         line.trim().startsWith('{/*') || // JSX block comments
         line.trim().startsWith('"""') // Python multiline comments
     );
@@ -59,21 +59,24 @@ function isCommentLine(line: string): boolean {
 
 function uncommentLine(line: string): string {
     let uncommentedText = line;
+
+    // Handle different comment styles
     if (line.startsWith('//')) {
         uncommentedText = line.replace(/^\s*\/\/\s?/, ''); // Remove '//' from the beginning of the line
     } else if (line.startsWith('/*')) {
-        uncommentedText = line.replace(/^\s*\/\*\*?\s?/, ''); // Remove '/*' or '/**' from the beginning of the line
+        uncommentedText = uncommentedText.replace(/^\s*\/\*\*?\s?/, ''); // Remove '/*' or '/**' from the beginning of the line
         uncommentedText = uncommentedText.replace(/\*+\/\s*$/, ''); // Remove '*/' from the end of the line
     } else if (line.startsWith('*')) {
-        uncommentedText = line.replace(/^\s*\*\s?/, ''); // Remove '*' from the beginning of the line
+        uncommentedText = line.replace(/^\s*\*\s?/, ''); // Remove '*' from the beginning of the line within a block comment
     } else if (line.startsWith('{/*')) {
-        uncommentedText = line.replace(/^\s*\{\/\*\s?/, ''); // Remove '{/*' from the beginning of the line
+        uncommentedText = uncommentedText.replace(/^\s*\{\/\*\s?/, ''); // Remove '{/*' from the beginning of the line
         uncommentedText = uncommentedText.replace(/\s*\*+\/\s*\}$/, ''); // Remove '*/}' from the end of the line
     } else if (line.startsWith('"""')) {
-        uncommentedText = line.replace(/^\s*"""/, ''); // Remove '"""' from the beginning of the line
+        uncommentedText = uncommentedText.replace(/^\s*"""/, ''); // Remove '"""' from the beginning of the line
         uncommentedText = uncommentedText.replace(/"""\s*$/, ''); // Remove '"""' from the end of the line
     }
-    // Remove trailing slash '/' if present
+
+    // Remove trailing slash '/' if present (for cases like '// /')
     uncommentedText = uncommentedText.replace(/\s*\/$/, '');
     return uncommentedText;
 }

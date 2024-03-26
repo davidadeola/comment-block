@@ -23,4 +23,4 @@ It is enclosed between
 console.log("not a comment")
 // This is another comment let's check it again
 
-{/* JSX elements here */}
+{/*JSX elements here*/}
