@@ -68,12 +68,6 @@ function uncommentLine(line: string): string {
         uncommentedText = uncommentedText.replace(/\*+\/\s*$/, ''); // Remove '*/' from the end of the line
     } else if (line.startsWith('*')) {
         uncommentedText = line.replace(/^\s*\*\s?/, ''); // Remove '*' from the beginning of the line within a block comment
-    } else if (line.startsWith('{/*')) {
-        uncommentedText = uncommentedText.replace(/^\s*\{\/\*\s?/, ''); // Remove '{/*' from the beginning of the line
-        uncommentedText = uncommentedText.replace(/\s*\*+\/\s*\}$/, ''); // Remove '*/}' from the end of the line
-    } else if (line.startsWith('"""')) {
-        uncommentedText = uncommentedText.replace(/^\s*"""/, ''); // Remove '"""' from the beginning of the line
-        uncommentedText = uncommentedText.replace(/"""\s*$/, ''); // Remove '"""' from the end of the line
     }
 
     // Remove trailing slash '/' if present (for cases like '// /')
