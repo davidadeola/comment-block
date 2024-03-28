@@ -1,3 +1,4 @@
+/* eslint-disable regexp/no-super-linear-backtracking */
 // The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
 
@@ -15,11 +16,9 @@ export function activate(context: vscode.ExtensionContext) {
         // Uncomment the entire block
         await editor.edit((editBuilder) => {
             for (let line = startLine; line <= endLine; line++) {
-                const text = document.lineAt(line).text.trim();
-                if (isCommentLine(text)) {
-                    const uncommentedText = uncommentLine(text);
-                    editBuilder.replace(document.lineAt(line).range, uncommentedText);
-                }
+                const text = document.lineAt(line).text;
+                const uncommentedText = uncommentLine(text);
+                editBuilder.replace(document.lineAt(line).range, uncommentedText);
             }
         });
     });
@@ -53,7 +52,7 @@ function isCommentLine(line: string): boolean {
         line.trim().startsWith('/*') ||
         line.trim().startsWith('*') || // Handles single line comments within a block comment (e.g., JSX)
         line.trim().startsWith('{/*') || // JSX block comments
-        line.trim().startsWith('"""') // Python multiline comments
+        line.trim().endsWith('*/}') // JSX block comments
     );
 }
 
@@ -68,10 +67,20 @@ function uncommentLine(line: string): string {
         uncommentedText = uncommentedText.replace(/\*+\/\s*$/, ''); // Remove '*/' from the end of the line
     } else if (line.startsWith('*')) {
         uncommentedText = line.replace(/^\s*\*\s?/, ''); // Remove '*' from the beginning of the line within a block comment
+    } else if (line.trim().startsWith('{/*')) {
+        // Regular expression to match the entire block comment including its contents
+        const commentRegex = /^\s*\{\/\*\s*(.*?)\s*\*+\/\s*\}$/;
+
+        // Use the regular expression to replace the entire block comment with its contents
+        uncommentedText = uncommentedText.replace(commentRegex, '$1');
+    } else if (line.trim().endsWith('*/}')) {
+        // Regular expression to match the entire block comment including its contents
+        const commentRegex = /^\s*(.*?)\s*\*+\/\s*\}$/;
+
+        // Use the regular expression to replace the entire block comment with its contents
+        uncommentedText = uncommentedText.replace(commentRegex, '$1');
     }
 
-    // Remove trailing slash '/' if present (for cases like '// /')
-    uncommentedText = uncommentedText.replace(/\s*\/$/, '');
     return uncommentedText;
 }
 

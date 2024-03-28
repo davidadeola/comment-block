@@ -65,7 +65,13 @@
             {
                 "command": "comment-block.uncomment",
                 "key": "Ctrl+Shift+/",
-                "mac": "Ctrl+Shift+/",
+                "win": "Ctrl+Shift+/",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "comment-block.uncomment",
+                "key": "Ctrl+Shift+/",
+                "linux": "Ctrl+Shift+/",
                 "when": "editorTextFocus"
             }
         ]
