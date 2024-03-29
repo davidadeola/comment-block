@@ -24,7 +24,5 @@ console.log("not a comment")
 // This is another comment let's check it again
 
 {/* JSX elements here */}
-
 {/* JSX elements here */}
-
 {/* <div>This is the inner Div</div> */}
