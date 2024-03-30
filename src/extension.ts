@@ -29,6 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
             case 'java':
             case 'cpp':
             case 'rust':
+            case 'php':
                 uncommentJavaScriptBlock(editor, position);
                 break;
             case 'typescriptreact':
@@ -42,6 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
                 uncommentRubyBlock(editor, position);
                 break;
             case 'html':
+            case 'markdown':
                 uncommentHtmlBlock(editor, position);
                 break;
             // Add more cases here for other languages

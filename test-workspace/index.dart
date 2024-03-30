@@ -1,0 +1,5 @@
+/*
+This is a block comment
+It can span multiple lines
+and is often used for longer explanations or documentation.
+*/

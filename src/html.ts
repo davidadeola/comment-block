@@ -16,20 +16,38 @@ export async function handleHtmlComments(editor: vscode.TextEditor, position: vs
 
     try {
         const success = await editor.edit((editBuilder) => {
-            // Remove the block comment start (`<!--`) and end (`-->`) delimiters
+            // Get the common leading whitespace before the block comment starts
             const startLineText = document.lineAt(startLine).text;
-            const endLineText = document.lineAt(endLine).text;
-            editBuilder.replace(
-                document.lineAt(startLine).range,
-                startLineText.replace('<!--', ''),
-            );
-            editBuilder.replace(document.lineAt(endLine).range, endLineText.replace('-->', ''));
+            const leadingWhitespace = startLineText.match(/^\s*/)?.[0] || '';
 
-            // Uncomment each line within the block
+            // Remove the block comment start (`<!--`) and end (`-->`) delimiters
+            const startLineTextTrimmed = startLineText.replace(/^\s*<!--\s*/, '');
+            const endLineTextTrimmed = document.lineAt(endLine).text.replace(/\s*-->\s*$/, '');
+
+            // Adjust indentation for each line within the block
             for (let i = startLine + 1; i < endLine; i++) {
                 const line = document.lineAt(i);
-                editBuilder.replace(line.range, line.text.trim().replace(/^\s*/, ''));
+                const lineText = line.text.trim();
+                const adjustedLineText = lineText.startsWith(leadingWhitespace)
+                    ? lineText.slice(leadingWhitespace.length)
+                    : lineText;
+
+                editBuilder.replace(line.range, adjustedLineText);
             }
+
+            // Handle the start and end lines separately
+            editBuilder.replace(
+                document.lineAt(startLine).range,
+                startLineTextTrimmed.startsWith(leadingWhitespace)
+                    ? startLineTextTrimmed.slice(leadingWhitespace.length)
+                    : startLineTextTrimmed,
+            );
+            editBuilder.replace(
+                document.lineAt(endLine).range,
+                endLineTextTrimmed.startsWith(leadingWhitespace)
+                    ? endLineTextTrimmed.slice(leadingWhitespace.length)
+                    : endLineTextTrimmed,
+            );
         });
 
         if (success) {
@@ -42,9 +60,6 @@ export async function handleHtmlComments(editor: vscode.TextEditor, position: vs
     }
 }
 
-export default async function uncommentHtmlBlock(
-    editor: vscode.TextEditor,
-    position: vscode.Position,
-) {
+export default async function uncommentBlock(editor: vscode.TextEditor, position: vscode.Position) {
     await handleHtmlComments(editor, position);
 }
