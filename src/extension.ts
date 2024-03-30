@@ -18,11 +18,15 @@ export function activate(context: vscode.ExtensionContext) {
         const languageId = document.languageId;
 
         console.log(position);
+        console.log(languageId);
 
         // Determine the action based on the language ID
         switch (languageId) {
             case 'javascript':
             case 'typescript':
+            case 'java':
+            case 'cpp':
+            case 'rust':
                 uncommentJavaScriptBlock(editor, position);
                 break;
             case 'typescriptreact':
