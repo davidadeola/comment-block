@@ -1,6 +1,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
 
+import uncommentJavaScriptBlock from './javascript';
+import uncommentPythonBlock from './python';
+
 export function activate(context: vscode.ExtensionContext) {
     const disposable = vscode.commands.registerCommand('comment-block.uncomment', async () => {
         const editor = vscode.window.activeTextEditor;
@@ -11,9 +14,25 @@ export function activate(context: vscode.ExtensionContext) {
 
         const position = editor.selection.active;
         const document = editor.document;
+        const languageId = document.languageId;
 
         console.log(position);
-        console.log(document.languageId);
+
+        // Determine the action based on the language ID
+        switch (languageId) {
+            case 'javascript':
+            case 'typescript':
+                uncommentJavaScriptBlock(editor, position);
+                break;
+            case 'python':
+                uncommentPythonBlock(editor, position);
+                break;
+            // Add more cases here for other languages
+            default:
+                vscode.window.showWarningMessage(`Uncommenting not supported for ${languageId}`);
+        }
+
+        vscode.window.showInformationMessage('comment-block');
     });
 
     context.subscriptions.push(disposable);
