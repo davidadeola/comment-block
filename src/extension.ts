@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import uncommentJavaScriptBlock from './javascript';
 import uncommentJSXBlock from './jsx';
 import uncommentPythonBlock from './python';
+import uncommentRubyBlock from './ruby';
 
 export function activate(context: vscode.ExtensionContext) {
     const disposable = vscode.commands.registerCommand('comment-block.uncomment', async () => {
@@ -35,6 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
                 break;
             case 'python':
                 uncommentPythonBlock(editor, position);
+                break;
+            case 'ruby':
+                uncommentRubyBlock(editor, position);
                 break;
             // Add more cases here for other languages
             default:
