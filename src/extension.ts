@@ -2,6 +2,7 @@
 import * as vscode from 'vscode';
 
 import uncommentJavaScriptBlock from './javascript';
+import uncommentJSXBlock from './jsx';
 import uncommentPythonBlock from './python';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -23,6 +24,10 @@ export function activate(context: vscode.ExtensionContext) {
             case 'javascript':
             case 'typescript':
                 uncommentJavaScriptBlock(editor, position);
+                break;
+            case 'typescriptreact':
+            case 'javascriptreact':
+                uncommentJSXBlock(editor, position);
                 break;
             case 'python':
                 uncommentPythonBlock(editor, position);
