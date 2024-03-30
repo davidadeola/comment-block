@@ -90,15 +90,24 @@ export function activate(context: vscode.ExtensionContext) {
                 for (let i = startLine; i <= endLine; i++) {
                     const line = document.lineAt(i);
                     let newText = line.text;
-                    if (i === startLine) {
+
+                    // Apply transformations only if the line is within the comment block
+                    if (i === startLine && i === endLine) {
+                        // Handle single-line comment block
+                        newText = newText.replace(/\{\s*\/\*\s*/, '').replace(/\s*\*\/\s*\}/, '');
+                    } else if (i === startLine) {
                         // Start of the comment block
-                        newText = newText.replace('{/*', '');
-                    }
-                    if (i === endLine) {
+                        newText = newText.replace(/\{\s*\/\*\s*/, '');
+                    } else if (i === endLine) {
                         // End of the comment block
-                        newText = newText.replace('*/}', '');
+                        newText = newText.replace(/\s*\*\/\s*\}/, '');
+                    } else {
+                        // Middle lines of the comment block
+                        // Remove leading whitespace followed by an asterisk, if present
+                        newText = newText.replace(/^\s*\*\s?/, '');
                     }
-                    // For single-line comments, both replacements will happen in one line
+
+                    // Replace the line with the new text, ensuring no unnecessary whitespace
                     editBuilder.replace(line.range, newText);
                 }
             })
