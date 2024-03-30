@@ -35,13 +35,23 @@ export function activate(context: vscode.ExtensionContext) {
         //     endLine++;
         // }
 
+        // let startLine = position.line;
+        // while (startLine >= 0 && !document.lineAt(startLine).text.includes('{/*')) {
+        //     startLine--;
+        // }
+
+        // let endLine = position.line;
+        // while (endLine < document.lineCount && !document.lineAt(endLine).text.includes('*/}')) {
+        //     endLine++;
+        // }
+
         let startLine = position.line;
-        while (startLine >= 0 && !document.lineAt(startLine).text.includes('{/*')) {
+        while (startLine >= 0 && !document.lineAt(startLine).text.includes('"""')) {
             startLine--;
         }
 
         let endLine = position.line;
-        while (endLine < document.lineCount && !document.lineAt(endLine).text.includes('*/}')) {
+        while (endLine < document.lineCount && !document.lineAt(endLine).text.includes('"""')) {
             endLine++;
         }
 
@@ -85,39 +95,69 @@ export function activate(context: vscode.ExtensionContext) {
         //         }
         //     });
 
+        // editor
+        //     .edit((editBuilder) => {
+        //         for (let i = startLine; i <= endLine; i++) {
+        //             const line = document.lineAt(i);
+        //             let newText = line.text;
+
+        //             // Apply transformations only if the line is within the comment block
+        //             if (i === startLine && i === endLine) {
+        //                 // Handle single-line comment block
+        //                 newText = newText.replace(/\{\s*\/\*\s*/, '').replace(/\s*\*\/\s*\}/, '');
+        //             } else if (i === startLine) {
+        //                 // Start of the comment block
+        //                 newText = newText.replace(/\{\s*\/\*\s*/, '');
+        //             } else if (i === endLine) {
+        //                 // End of the comment block
+        //                 newText = newText.replace(/\s*\*\/\s*\}/, '');
+        //             } else {
+        //                 // Middle lines of the comment block
+        //                 // Remove leading whitespace followed by an asterisk, if present
+        //                 newText = newText.replace(/^\s*\*\s?/, '');
+        //             }
+
+        //             // Replace the line with the new text, ensuring no unnecessary whitespace
+        //             editBuilder.replace(line.range, newText);
+        //         }
+        //     })
+        //     .then((success) => {
+        //         if (success) {
+        //             vscode.window.showInformationMessage(
+        //                 'JSX comment block uncommented successfully!',
+        //             );
+        //         } else {
+        //             vscode.window.showErrorMessage('Failed to uncomment JSX comment block');
+        //         }
+        //     });
+
         editor
             .edit((editBuilder) => {
-                for (let i = startLine; i <= endLine; i++) {
-                    const line = document.lineAt(i);
-                    let newText = line.text;
+                const startLineText = document.lineAt(startLine).text;
+                const endLineText = document.lineAt(endLine).text;
 
-                    // Apply transformations only if the line is within the comment block
-                    if (i === startLine && i === endLine) {
-                        // Handle single-line comment block
-                        newText = newText.replace(/\{\s*\/\*\s*/, '').replace(/\s*\*\/\s*\}/, '');
-                    } else if (i === startLine) {
-                        // Start of the comment block
-                        newText = newText.replace(/\{\s*\/\*\s*/, '');
-                    } else if (i === endLine) {
-                        // End of the comment block
-                        newText = newText.replace(/\s*\*\/\s*\}/, '');
-                    } else {
-                        // Middle lines of the comment block
-                        // Remove leading whitespace followed by an asterisk, if present
-                        newText = newText.replace(/^\s*\*\s?/, '');
-                    }
+                // Handle the scenario where the start and end are on the same line
+                if (startLine === endLine) {
+                    // eslint-disable-next-line unicorn/prefer-string-replace-all
+                    const newText = startLineText.replace(/"""/g, '');
+                    editBuilder.replace(document.lineAt(startLine).range, newText);
+                } else {
+                    // Remove the start of the block comment
+                    const newTextStart = startLineText.replace(/"""/, '');
+                    editBuilder.replace(document.lineAt(startLine).range, newTextStart);
 
-                    // Replace the line with the new text, ensuring no unnecessary whitespace
-                    editBuilder.replace(line.range, newText);
+                    // Remove the end of the block comment
+                    const newTextEnd = endLineText.replace(/"""/, '');
+                    editBuilder.replace(document.lineAt(endLine).range, newTextEnd);
                 }
             })
             .then((success) => {
                 if (success) {
                     vscode.window.showInformationMessage(
-                        'JSX comment block uncommented successfully!',
+                        'Python block comment uncommented successfully!',
                     );
                 } else {
-                    vscode.window.showErrorMessage('Failed to uncomment JSX comment block');
+                    vscode.window.showErrorMessage('Failed to uncomment Python block comment');
                 }
             });
 
