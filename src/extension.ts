@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
 
+import uncommentCSSBlock from './css';
 import uncommentHtmlBlock from './html';
 import uncommentJavaScriptBlock from './javascript';
 import uncommentJSXBlock from './jsx';
@@ -45,6 +46,9 @@ export function activate(context: vscode.ExtensionContext) {
             case 'html':
             case 'markdown':
                 uncommentHtmlBlock(editor, position);
+                break;
+            case 'css':
+                uncommentCSSBlock(editor, position);
                 break;
             // Add more cases here for other languages
             default:
