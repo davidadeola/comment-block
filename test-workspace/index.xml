@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <person>
+        <name>John Doe</name>
+        <age>30</age>
+        <address>
+            <street>123 Main Street</street>
+            <city>Anytown</city>
+            <state>AnyState</state>
+            <zip>12345</zip>
+        </address>
+    </person>
+    <!-- <contacts>
+        <contact>
+            <name>Alice</name>
+            <phone>123-456-7890</phone>
+        </contact>
+        <contact>
+            <name>Bob</name>
+            <phone>987-654-3210</phone>
+            <email>bob@example.com</email>
+        </contact>
+    </contacts> -->
+    <todos>
+        <todo>
+            <task>Complete project</task>
+            <priority>High</priority>
+            <completed>false</completed>
+        </todo>
+        <todo>
+            <task>Review documentation</task>
+            <priority>Medium</priority>
+            <completed>true</completed>
+        </todo>
+        <todo>
+            <task>Test application</task>
+            <priority>Low</priority>
+            <completed>false</completed>
+        </todo>
+    </todos>
+</data>

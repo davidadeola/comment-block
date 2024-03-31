@@ -28,9 +28,7 @@ export async function handleHtmlComments(editor: vscode.TextEditor, position: vs
             for (let i = startLine + 1; i < endLine; i++) {
                 const line = document.lineAt(i);
                 const lineText = line.text.trim();
-                const adjustedLineText = lineText.startsWith(leadingWhitespace)
-                    ? lineText.slice(leadingWhitespace.length)
-                    : lineText;
+                const adjustedLineText = leadingWhitespace + lineText;
 
                 editBuilder.replace(line.range, adjustedLineText);
             }
@@ -60,6 +58,9 @@ export async function handleHtmlComments(editor: vscode.TextEditor, position: vs
     }
 }
 
-export default async function uncommentBlock(editor: vscode.TextEditor, position: vscode.Position) {
+export default async function uncommentHtmlBlock(
+    editor: vscode.TextEditor,
+    position: vscode.Position,
+) {
     await handleHtmlComments(editor, position);
 }

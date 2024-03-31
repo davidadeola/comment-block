@@ -1,0 +1,25 @@
+# Sample YAML file
+person:
+  name: John Doe
+  age: 30
+  address:
+    street: 123 Main Street
+    city: Anytown
+    state: AnyState
+    zip: '12345'
+contacts:
+  - name: Alice
+    phone: '123-456-7890'
+  - name: Bob
+    phone: '987-654-3210'
+    email: bob@example.com
+todos:
+  - task: Complete project
+    priority: High
+    completed: false
+  - task: Review documentation
+    priority: Medium
+    completed: true
+  - task: Test application
+    priority: Low
+    completed: false
