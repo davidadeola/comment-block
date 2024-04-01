@@ -1,7 +1,13 @@
 // @ts-ignore
 import React from 'react'
 
+
+
 const Index = () => {
+  const handleFunction = () => {
+    const work = new Date()
+    return;
+  }
   return (
     <div>
       {/* <h1>Hello World!</h1>

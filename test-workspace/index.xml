@@ -10,17 +10,17 @@
             <zip>12345</zip>
         </address>
     </person>
-    <!-- <contacts>
-        <contact>
-            <name>Alice</name>
-            <phone>123-456-7890</phone>
-        </contact>
-        <contact>
-            <name>Bob</name>
-            <phone>987-654-3210</phone>
-            <email>bob@example.com</email>
-        </contact>
-    </contacts> -->
+<!-- <contacts>
+    <contact>
+    <name>Alice</name>
+    <phone>123-456-7890</phone>
+    </contact>
+    <contact>
+    <name>Bob</name>
+    <phone>987-654-3210</phone>
+    <email>bob@example.com</email>
+    </contact>
+</contacts> -->
     <todos>
         <todo>
             <task>Complete project</task>

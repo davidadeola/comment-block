@@ -33,6 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
             case 'php':
             case 'c':
             case 'csharp':
+            case 'plaintext':
                 uncommentJavaScriptBlock(editor, position);
                 break;
             case 'typescriptreact':

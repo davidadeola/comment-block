@@ -16,36 +16,19 @@ export async function handleHtmlComments(editor: vscode.TextEditor, position: vs
 
     try {
         const success = await editor.edit((editBuilder) => {
-            // Get the common leading whitespace before the block comment starts
-            const startLineText = document.lineAt(startLine).text;
-            const leadingWhitespace = startLineText.match(/^\s*/)?.[0] || '';
+            // Remove `<!--` from the start line and `-->` from the end line
+            const startReplacement = document.lineAt(startLine).text.replace(/<!--\s*/, '');
+            const endReplacement = document.lineAt(endLine).text.replace(/\s*-->/, '');
 
-            // Remove the block comment start (`<!--`) and end (`-->`) delimiters
-            const startLineTextTrimmed = startLineText.replace(/^\s*<!--\s*/, '');
-            const endLineTextTrimmed = document.lineAt(endLine).text.replace(/\s*-->\s*$/, '');
+            // Replace the lines with the updated text
+            editBuilder.replace(document.lineAt(startLine).range, startReplacement);
+            editBuilder.replace(document.lineAt(endLine).range, endReplacement);
 
-            // Adjust indentation for each line within the block
+            // Uncomment each line within the block
             for (let i = startLine + 1; i < endLine; i++) {
                 const line = document.lineAt(i);
-                const lineText = line.text.trim();
-                const adjustedLineText = leadingWhitespace + lineText;
-
-                editBuilder.replace(line.range, adjustedLineText);
+                editBuilder.replace(line.range, line.text);
             }
-
-            // Handle the start and end lines separately
-            editBuilder.replace(
-                document.lineAt(startLine).range,
-                startLineTextTrimmed.startsWith(leadingWhitespace)
-                    ? startLineTextTrimmed.slice(leadingWhitespace.length)
-                    : startLineTextTrimmed,
-            );
-            editBuilder.replace(
-                document.lineAt(endLine).range,
-                endLineTextTrimmed.startsWith(leadingWhitespace)
-                    ? endLineTextTrimmed.slice(leadingWhitespace.length)
-                    : endLineTextTrimmed,
-            );
         });
 
         if (success) {

@@ -5,16 +5,7 @@
 * now let's test our extension
 */
 
-{/* 
-This is a block comment in JSX.
-It is enclosed between
-*/}
 
-{/*
-  <div>
-    <div>This is the inner Div</div>
-  </div>
-*/}
 
 // console.log('test workspace!');
 // function unBuild () {
@@ -22,7 +13,3 @@ It is enclosed between
 // }
 console.log("not a comment")
 // This is another comment let's check it again
-
-{/* JSX elements here */}
-{/* JSX elements here */}
-{/* <div>This is the inner Div</div> */}

@@ -13,13 +13,13 @@ contacts:
   - name: Bob
     phone: '987-654-3210'
     email: bob@example.com
-todos:
-  - task: Complete project
-    priority: High
-    completed: false
-  - task: Review documentation
-    priority: Medium
-    completed: true
-  - task: Test application
-    priority: Low
-    completed: false
+# todos:
+#   - task: Complete project
+#     priority: High
+#     completed: false
+#   - task: Review documentation
+#     priority: Medium
+#     completed: true
+#   - task: Test application
+#     priority: Low
+#     completed: false

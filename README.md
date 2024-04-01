@@ -1,61 +1,57 @@
-# vscode extension boilerplate
+# Comment Block Extension
 
-<div align="center">
+## Overview
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items/YuTengjing.awesome-vscode-extension-boilerplate/changelog) [![Installs](https://img.shields.io/visual-studio-marketplace/i/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.awesome-vscode-extension-boilerplate) [![Downloads](https://img.shields.io/visual-studio-marketplace/d/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.awesome-vscode-extension-boilerplate) [![Rating Star](https://img.shields.io/visual-studio-marketplace/stars/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.awesome-vscode-extension-boilerplate&ssr=false#review-details) [![Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/YuTengjing.awesome-vscode-extension-boilerplate)](https://github.com/tjx666/awesome-vscode-extension-boilerplate)
-
-![CI](https://github.com/tjx666/awesome-vscode-extension-boilerplate/actions/workflows/ci.yml/badge.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) [![Github Open Issues](https://img.shields.io/github/issues/tjx666/awesome-vscode-extension-boilerplate)](https://github.com/tjx666/awesome-vscode-extension-boilerplate/issues) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg?style=flat-square)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
-
-</div>
+The "Comment Block" extension for Visual Studio Code (VS Code) provides functionality to quickly uncomment block comments in various programming languages. It detects and handles different styles of block comments, including single-line (`//`), multi-line (`/* */`), JSX block comments (`{/* */}`), Python block comments (`""" """`), and many more. The extension allows developers to efficiently uncomment entire comment blocks with a single command.
 
 ## Features
 
-- github actions support publish extension to both vs marketplace and open vsx
-- auto generate changelog and publish github release, make sure you enabled the write permission of github actions
-- pnpm/eslint/prettier/ling-staged/simple-git-hooks/stale-dep
-- use esbuild to bundle extension
+Seamless Uncommenting: This extension allows users to uncomment any block of code with a single command, regardless of the cursor's position within the comment. The extension accurately detects the beginning and end of comment blocks based on the cursor position and the content of the document. It ensures that the entire comment block is uncommented, even if it spans multiple lines or contains nested comment structures.
 
-## Setup
+Context-Aware Mechanism: 'Comment block' intelligently detects the type and boundaries of comments, whether they are single-line comments, multi-line blocks, or JSX comments, ensuring accurate uncommenting.
 
-After fork this repository and clone it to local, run:
+Precision in Code Cleanup: 'Comment block' meticulously removes comment delimiters and leading asterisks, aligning the uncommented code perfectly with the rest of the codebase and eliminating superfluous whitespace.
 
-```bash
-cd <your-extension-directory>
-npx setup-boilerplate
-```
+Supported Comment Styles
+The extension supports the following comment styles:
 
-You can also just skip this step and adjust the boilerplate by yourself.
+- Single-line comments (`//`)
+- Multi-line comments (`/\* _/`)
+- JSX block comments (`{/* */}`)
+- Python single-line comments (`#`)
+- Python block comments (`""" """`)
+- HTML block comments (`<-- -->`)
+- Ruby block comments (`=begin and =end`)
 
-## Development
+## How to Use
 
-Install dependencies by:
+To use the "Comment Block" extension, follow these steps:
 
-```shell
-pnpm install
-```
+- Open a file containing commented code in VS Code.
+- Place the cursor inside the comment block you want to uncomment.
+- Execute the "Uncomment Block" command by press `Ctrl+Shift+/` for Windows or Linux and: `Cmd+Shift+/` for Mac OS. This immediately uncomments the comment block.
 
-Then run and debug extension like in [official documentation](https://code.visualstudio.com/api/get-started/your-first-extension)
+## Configuration
 
-## Publish
+The "Comment Block" extension does not require any configuration. However, developers can customize the behavior of the extension by modifying settings in the settings.json file. Available configuration options include:
 
-You need set two github actions secrets:
+## Troubleshooting
 
-- VS_MARKETPLACE_TOKEN: [Visual Studio Marketplace token](https://learn.microsoft.com/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
-- OPEN_VSX_TOKEN: [Open VSX Registry token](https://github.com/eclipse/openvsx/wiki/Publishing-Extensions#3-create-an-access-token)
+If you encounter any issues with the "Comment Block" extension, consider the following troubleshooting steps:
 
-```shell
-pnpm release
-```
+Ensure that the extension is installed and enabled in VS Code.
+Verify that the cursor is positioned correctly inside the comment block before executing the "Uncomment Block" command.
+Check for conflicts with other extensions that may modify comment behavior or keybindings.
+If the issue persists, you can report it on the extension's GitHub repository for further assistance.
 
-## My extensions
+## Contributing to the Extension
 
-- [Open in External App](https://github.com/tjx666/open-in-external-app)
-- [VSCode archive](https://github.com/tjx666/vscode-archive)
-- [Neo File Utils](https://github.com/tjx666/vscode-neo-file-utils)
-- [VSCode FE Helper](https://github.com/tjx666/vscode-fe-helper)
-- [Modify File Warning](https://github.com/tjx666/modify-file-warning)
-- [Power Edit](https://github.com/tjx666/power-edit)
-- [Adobe Extension Development Tools](https://github.com/tjx666/vscode-adobe-extension-devtools)
-- [Scripting Listener](https://github.com/tjx666/scripting-listener)
+Contributions to the "Comment Block" extension are welcome! If you have ideas for new features, improvements, or bug fixes, feel free to submit a pull request on the extension's GitHub repository. Be sure to follow the contribution guidelines and code of conduct when contributing to the project. Contribute to the repository here: [GitHub comment-block](https://github.com/davidadeola/comment-block)
 
-Check all here: [publishers/YuTengjing](https://marketplace.visualstudio.com/publishers/YuTengjing)
+## Support and Contact Information
+
+For questions, feedback, or support related to the "Comment Block" extension, you can contact the maintainer via email at adeoladavidoluwole@gmail.com or through the extension's GitHub repository.
+
+## Licensing
+
+The "Comment Block" extension is licensed under the MIT License. By using or contributing to the extension, you agree to the terms and conditions of this license.
