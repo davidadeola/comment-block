@@ -1,9 +1,9 @@
 {
     "name": "comment-block",
     "displayName": "Uncomment block comment",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "VSCode extension that uncomments an entire block of code with a single command, from any position in the block of comment.",
-    "publisher": "davidadeola",
+    "publisher": "DavidAdeola",
     "private": true,
     "preview": false,
     "author": {
@@ -26,6 +26,7 @@
         "block",
         "comment block",
         "uncomment",
+        "uncomment block",
         "uncomment comment",
         "uncomment block comment",
         "remove comment",
@@ -38,7 +39,7 @@
     "main": "./out/src/extension.js",
     "icon": "assets/logo.png",
     "engines": {
-        "vscode": "^1.86.0"
+        "vscode": "^1.87.0"
     },
     "badges": [
         {
@@ -112,26 +113,26 @@
     "devDependencies": {
         "@types/glob": "^8.1.0",
         "@types/mocha": "^10.0.6",
-        "@types/node": "^20.11.20",
+        "@types/node": "^20.12.2",
         "@types/vscode": "^1.86.0",
         "@vscode/test-electron": "^2.3.9",
         "@vscode/vsce": "^2.24.0",
-        "@yutengjing/eslint-config-typescript": "^0.5.2",
-        "@yutengjing/prettier-config": "^1.1.2",
+        "@yutengjing/eslint-config-typescript": "^0.7.0",
+        "@yutengjing/prettier-config": "^1.2.0",
         "@yutengjing/release": "^0.2.0",
         "@yutengjing/tsconfig-node": "^0.0.5",
-        "esbuild": "^0.20.1",
+        "esbuild": "^0.20.2",
         "esbuild-visualizer": "^0.6.0",
         "eslint": "^8.57.0",
-        "glob": "^10.3.10",
+        "glob": "^10.3.12",
         "lint-staged": "^15.2.2",
-        "mocha": "^10.3.0",
-        "ovsx": "^0.8.3",
+        "mocha": "^10.4.0",
+        "ovsx": "^0.9.0",
         "prettier": "^3.2.5",
         "rimraf": "^5.0.5",
-        "simple-git-hooks": "^2.9.0",
+        "simple-git-hooks": "^2.11.1",
         "stale-dep": "^0.7.0",
         "tsx": "^4.7.1",
-        "typescript": "^5.3.3"
+        "typescript": "^5.4.3"
     }
 }
