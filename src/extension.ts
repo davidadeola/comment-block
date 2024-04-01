@@ -61,8 +61,6 @@ export function activate(context: vscode.ExtensionContext) {
             default:
                 vscode.window.showWarningMessage(`Uncommenting not supported for ${languageId}`);
         }
-
-        vscode.window.showInformationMessage('comment-block');
     });
 
     context.subscriptions.push(disposable);

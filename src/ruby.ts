@@ -74,9 +74,9 @@ async function handlePoundComments(editor: vscode.TextEditor, position: vscode.P
             }
         });
         if (success) {
-            vscode.window.showInformationMessage('Python line comments uncommented successfully!');
+            console.log('Success');
         } else {
-            vscode.window.showErrorMessage('Failed to uncomment Python line comments');
+            vscode.window.showErrorMessage('Failed to uncomment the block');
         }
     } catch (error) {
         console.error(error);

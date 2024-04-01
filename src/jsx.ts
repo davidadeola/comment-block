@@ -43,9 +43,9 @@ async function handleJSXComments(editor: vscode.TextEditor, position: vscode.Pos
             }
         });
         if (success) {
-            vscode.window.showInformationMessage('JSX comment block uncommented successfully!');
+            console.log('Success');
         } else {
-            vscode.window.showErrorMessage('Failed to uncomment JSX comment block');
+            vscode.window.showErrorMessage('Failed to uncomment the block');
         }
     } catch (error) {
         console.error(error);

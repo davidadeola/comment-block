@@ -29,7 +29,7 @@ export async function handleSlashSlashComments(
         });
 
         if (success) {
-            vscode.window.showInformationMessage('Block uncommented successfully!');
+            console.log('Success');
         } else {
             vscode.window.showErrorMessage('Failed to uncomment the block');
         }
@@ -71,7 +71,7 @@ export async function handleSlashStarComments(
         });
 
         if (success) {
-            vscode.window.showInformationMessage('Block uncommented successfully!');
+            console.log('Success');
         } else {
             vscode.window.showErrorMessage('Failed to uncomment the block');
         }

@@ -32,9 +32,9 @@ export async function handleHtmlComments(editor: vscode.TextEditor, position: vs
         });
 
         if (success) {
-            vscode.window.showInformationMessage('HTML block uncommented successfully!');
+            console.log('Success');
         } else {
-            vscode.window.showErrorMessage('Failed to uncomment the HTML block');
+            vscode.window.showErrorMessage('Failed to uncomment the block');
         }
     } catch (error) {
         console.error(error);
