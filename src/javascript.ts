@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 
+import handleJSXComments from './jsx';
+
 export async function handleSlashSlashComments(
     editor: vscode.TextEditor,
     position: vscode.Position,
@@ -86,4 +88,5 @@ export default async function uncommentJavaScriptBlock(
 ) {
     await handleSlashSlashComments(editor, position);
     await handleSlashStarComments(editor, position);
+    await handleJSXComments(editor, position);
 }

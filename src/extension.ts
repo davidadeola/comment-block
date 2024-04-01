@@ -4,7 +4,6 @@ import * as vscode from 'vscode';
 import uncommentCSSBlock from './css';
 import uncommentHtmlBlock from './html';
 import uncommentJavaScriptBlock from './javascript';
-import uncommentJSXBlock from './jsx';
 import uncommentPythonBlock from './python';
 import uncommentRubyBlock from './ruby';
 
@@ -34,11 +33,9 @@ export function activate(context: vscode.ExtensionContext) {
             case 'c':
             case 'csharp':
             case 'plaintext':
-                uncommentJavaScriptBlock(editor, position);
-                break;
             case 'typescriptreact':
             case 'javascriptreact':
-                uncommentJSXBlock(editor, position);
+                uncommentJavaScriptBlock(editor, position);
                 break;
             case 'python':
             case 'yaml':

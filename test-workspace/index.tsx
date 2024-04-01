@@ -3,11 +3,16 @@ import React from 'react'
 
 
 
+// const handleFunction = () => {
+  //   const work = new Date()
+  //   return;
+  // }
+
 const Index = () => {
-  const handleFunction = () => {
-    const work = new Date()
-    return;
-  }
+  // const handleFunction = () => {
+  //   const work = new Date()
+  //   return;
+  // }
   return (
     <div>
       <h1>Hello World!</h1>
