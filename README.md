@@ -31,7 +31,7 @@ To use the "Comment Block" extension, follow these steps:
 - Place the cursor inside the comment block you want to uncomment.
 - Execute the "Block Commenter" command by press `Ctrl+Shift+/` for Windows or Linux and: `Cmd+Shift+/` for Mac OS. This immediately uncomments the comment block.
 
-![example](assets/video.gif)
+<div ><img alt="Block Commenter Demo" src="https://res.cloudinary.com/devkp5za2/image/upload/v1712070152/video_rlpirt.gif" /></div>
 
 ## Configuration
 
