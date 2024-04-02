@@ -19,9 +19,6 @@ export function activate(context: vscode.ExtensionContext) {
         const document = editor.document;
         const languageId = document.languageId;
 
-        console.log(position);
-        console.log(languageId);
-
         // Determine the action based on the language ID
         switch (languageId) {
             case 'typescript':

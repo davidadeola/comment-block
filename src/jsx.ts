@@ -22,15 +22,16 @@ async function handleJSXComments(editor: vscode.TextEditor, position: vscode.Pos
                 const line = document.lineAt(i);
                 let newText = line.text;
 
+                // Apply transformations only if the line is within the comment block
                 if (i === startLine && i === endLine) {
                     // Handle single-line comment block
-                    newText = newText.replace(/\s*\/\*\s*/, '').replace(/\s*\*\/\s*/, '');
+                    newText = newText.replace(/\{\s*\/\*\s*/, '').replace(/\s*\*\/\s*\}/, '');
                 } else if (i === startLine) {
                     // Start of the comment block
-                    newText = newText.replace(/\s*\/\*\s*/, '');
+                    newText = newText.replace(/\{\s*\/\*\s*/, '');
                 } else if (i === endLine) {
                     // End of the comment block
-                    newText = newText.replace(/\s*\*\/\s*/, '');
+                    newText = newText.replace(/\s*\*\/\s*\}/, '');
                 } else {
                     // Middle lines of the comment block
                     // Remove leading whitespace followed by an asterisk, if present
@@ -56,6 +57,5 @@ export default async function uncommentJSXBlock(
     position: vscode.Position,
 ) {
     await handleSlashSlashComments(editor, position);
-    // await handleSlashStarComments(editor, position);
     await handleJSXComments(editor, position);
 }
