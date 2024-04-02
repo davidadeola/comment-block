@@ -1,5 +1,8 @@
-/*
-This is a block comment
-It can span multiple lines
-and is often used for longer explanations or documentation.
+
+
+/**
+* This is the first
+* this is the second
+* this is the third line in the block
+* now let's test our extension
 */

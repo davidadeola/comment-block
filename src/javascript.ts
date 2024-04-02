@@ -1,7 +1,5 @@
 import * as vscode from 'vscode';
 
-import handleJSXComments from './jsx';
-
 export async function handleSlashSlashComments(
     editor: vscode.TextEditor,
     position: vscode.Position,
@@ -49,7 +47,7 @@ export async function handleSlashStarComments(
     let startLine = position.line;
     let endLine = position.line;
 
-    while (startLine >= 0 && !document.lineAt(startLine).text.includes('/**')) {
+    while (startLine >= 0 && !document.lineAt(startLine).text.includes('/*')) {
         startLine--;
     }
 
@@ -59,16 +57,29 @@ export async function handleSlashStarComments(
 
     try {
         const success = await editor.edit((editBuilder) => {
-            // Remove the block comment start (`/**`) and end (`*/`) delimiters
-            const startLineText = document.lineAt(startLine).text;
-            const endLineText = document.lineAt(endLine).text;
-            editBuilder.replace(document.lineAt(startLine).range, startLineText.replace('/**', ''));
-            editBuilder.replace(document.lineAt(endLine).range, endLineText.replace('*/', ''));
-
-            // Uncomment each line within the block
-            for (let i = startLine + 1; i < endLine; i++) {
+            for (let i = startLine; i <= endLine; i++) {
                 const line = document.lineAt(i);
-                editBuilder.replace(line.range, line.text.replace(/^\s*\*\s?/, ''));
+                let newText = line.text;
+
+                // Apply transformations only if the line is within the comment block
+                if (i === startLine && i === endLine) {
+                    // Handle single-line comment block
+                    newText = newText.replace(/^\s*\/\*\s*/, '').replace(/\s*\*\/\s*$/, '');
+                } else if (i === startLine) {
+                    // Start of the comment block
+                    newText = newText.replace(/^\s*\/\*\s*/, '');
+                } else if (i === endLine) {
+                    // End of the comment block
+                    newText = newText.replace(/\s*\*\/\s*$/, '');
+                } else {
+                    // Middle lines of the comment block
+                    // Remove leading whitespace followed by an asterisk, if present
+                    newText = newText.replace(/^\s*\*\s*/, '');
+                }
+                newText = newText.replace(/^\s*\*\s*/, '');
+
+                // Replace the line with the new text, ensuring no unnecessary whitespace
+                editBuilder.replace(line.range, newText);
             }
         });
 
@@ -82,11 +93,10 @@ export async function handleSlashStarComments(
     }
 }
 
-export default async function uncommentJavaScriptBlock(
+export default async function uncommentSlashBlock(
     editor: vscode.TextEditor,
     position: vscode.Position,
 ) {
     await handleSlashSlashComments(editor, position);
     await handleSlashStarComments(editor, position);
-    await handleJSXComments(editor, position);
 }

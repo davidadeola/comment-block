@@ -1,8 +1,8 @@
 {
     "name": "comment-block",
-    "displayName": "Uncomment block comment",
-    "version": "0.0.2",
-    "description": "VSCode extension that uncomments an entire block of code with a single command, from any position in the block of comment.",
+    "displayName": "Block Commenter",
+    "version": "0.0.3",
+    "description": "Effortlessly uncomment entire code blocks with a single command, no matter where you place your cursor – even within the blocks themselves!",
     "publisher": "DavidAdeola",
     "private": true,
     "preview": false,

@@ -1,5 +1,4 @@
 // @ts-ignore
-import React from 'react'
 
 /**
 * This is the first
@@ -7,19 +6,11 @@ import React from 'react'
 * this is the third line in the block
 * now let's test our extension
 */
-
-/*
-* This is the first
-* this is the second
-* this is the third line in the block
-* now let's test our extension
-*/
-
+  
 // const handleFunction = () => {
-  //   const work = new Date()
-  //   return;
-  // }
-
+//   const work = new Date()
+//   return;
+// }
 const Index = () => {
   // const handleFunction = () => {
   //   const work = new Date()
@@ -44,3 +35,12 @@ const Index = () => {
 }
 
 export default Index
+
+// console.log('test workspace!');
+// function unBuild () {
+//   let build = window.document.links;
+// }
+console.log("not a comment")
+// This is another comment let's check it again
+// This is another comment let's check it again
+// This is another comment let's check it again

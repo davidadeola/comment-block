@@ -1,9 +1,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
 
-import uncommentCSSBlock from './css';
 import uncommentHtmlBlock from './html';
-import uncommentJavaScriptBlock from './javascript';
+import uncommentSlashBlock from './javascript';
+import uncommentJSXBlock from './jsx';
 import uncommentPythonBlock from './python';
 import uncommentRubyBlock from './ruby';
 
@@ -24,7 +24,6 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Determine the action based on the language ID
         switch (languageId) {
-            case 'javascript':
             case 'typescript':
             case 'java':
             case 'cpp':
@@ -33,9 +32,14 @@ export function activate(context: vscode.ExtensionContext) {
             case 'c':
             case 'csharp':
             case 'plaintext':
+            case 'css':
+            case 'dart':
+                uncommentSlashBlock(editor, position);
+                break;
+            case 'javascript':
             case 'typescriptreact':
             case 'javascriptreact':
-                uncommentJavaScriptBlock(editor, position);
+                uncommentJSXBlock(editor, position);
                 break;
             case 'python':
             case 'yaml':
@@ -49,10 +53,6 @@ export function activate(context: vscode.ExtensionContext) {
             case 'xml':
             case 'markdown':
                 uncommentHtmlBlock(editor, position);
-                break;
-            case 'css':
-            case 'dart':
-                uncommentCSSBlock(editor, position);
                 break;
             // Add more cases here for other languages
             default:
