@@ -1,4 +1,4 @@
-# Comment Block Extension
+# Block Comments - VSCode extension
 
 ## Overview
 
@@ -31,7 +31,7 @@ To use the "Comment Block" extension, follow these steps:
 - Place the cursor inside the comment block you want to uncomment.
 - Execute the "Block Commenter" command by press `Ctrl+Shift+/` for Windows or Linux and: `Cmd+Shift+/` for Mac OS. This immediately uncomments the comment block.
 
-![Video Example](./assets/video.gif)
+![example](assets/video.gif)
 
 ## Configuration
 
