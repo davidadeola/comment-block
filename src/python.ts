@@ -65,7 +65,7 @@ async function handlePoundComments(editor: vscode.TextEditor, position: vscode.P
             for (let i = startLine; i <= endLine; i++) {
                 const line = document.lineAt(i);
                 // Replace the '#' at the start of the line with an empty string, trimming any whitespace immediately after the '#'
-                const newText = line.text.replace(/^\s*#\s?/, '');
+                const newText = line.text.replace(/^(\s*)#(\s)/, '$1');
                 editBuilder.replace(line.range, newText);
             }
         });
