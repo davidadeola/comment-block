@@ -1,7 +1,7 @@
 {
     "name": "comment-block",
     "displayName": "Block Commenter",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Effortlessly uncomment entire code blocks with a single command, no matter where you place your cursor – even within the blocks themselves!",
     "publisher": "DavidAdeola",
     "private": true,
