@@ -6,6 +6,7 @@ import uncommentSlashBlock from './javascript';
 import uncommentJSXBlock from './jsx';
 import uncommentPythonBlock from './python';
 import uncommentRubyBlock from './ruby';
+import uncommentVueBlock from './vue';
 
 export function activate(context: vscode.ExtensionContext) {
     const disposable = vscode.commands.registerCommand('comment-block.uncomment', async () => {
@@ -30,7 +31,13 @@ export function activate(context: vscode.ExtensionContext) {
             case 'csharp':
             case 'plaintext':
             case 'css':
+            case 'scss':
+            case 'sass':
             case 'dart':
+            case 'go':
+            case 'swift':
+            case 'kotlin':
+            case 'scala':
                 uncommentSlashBlock(editor, position);
                 break;
             case 'javascript':
@@ -50,6 +57,9 @@ export function activate(context: vscode.ExtensionContext) {
             case 'xml':
             case 'markdown':
                 uncommentHtmlBlock(editor, position);
+                break;
+            case 'vue':
+                uncommentVueBlock(editor, position);
                 break;
             // Add more cases here for other languages
             default:
